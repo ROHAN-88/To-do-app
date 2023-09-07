@@ -26,7 +26,7 @@ const Todoform = () => {
           name: Yup.string()
             .min(1, "Must be 1 letter long")
             .required("Required"),
-          date: Yup.string().required("Date is required"),
+          date: Yup.date().required("Date is required"),
         })}
         onSubmit={(values) => {
           values.id = getRandomId();
@@ -56,7 +56,7 @@ const Todoform = () => {
             <TextField
               label="Date"
               required
-              type="text"
+              type="date"
               {...formik.getFieldProps("date")}
             />
             {formik.touched.date && formik.errors.date ? (
