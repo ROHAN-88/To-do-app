@@ -1,0 +1,15 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 200px; height: 200px;"><style>
+     .line-slider1 {animation:line-slider1-adjust 3s infinite;}
+     @keyframes line-slider1-adjust {
+         20%{transform:translate3d(0, 0, 0);}
+         50%{transform:translate3d(66px, 0, 0);}
+         60%{transform:translate3d(66px, 0, 0);}
+         90%{transform:translate3d(0, 0, 0);}
+         100%{transform:translate3d(0, 0, 0);}
+     }
+     @media (prefers-reduced-motion: reduce) {
+         .line-slider1 {
+             animation: none;
+         }
+     }
+    </style><line class="stroke2" x1="4" y1="49" x2="96" y2="49" stroke="#000" stroke-width="2px" style="animation-duration: 3s;"></line><circle class="line-slider1 stroke1 fill1" cx="17" cy="49" r="8" fill="#fff" stroke="rgba(183,11,11,1)" stroke-width="2px" style="animation-duration: 3s;"></circle></svg>

@@ -1,14 +1,28 @@
-import React from "react";
 import { Formik } from "formik";
+import React from "react";
 
-import TextField from "@mui/material/TextField";
-import * as Yup from "yup";
 import { Button } from "@mui/material";
-import getRandomId from "../util/uniqeId";
-import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../store/todoSlice";
+import TextField from "@mui/material/TextField";
+import { useMutation, useQueryClient } from "react-query";
+import * as Yup from "yup";
+import { addtodo } from "../lib/todoApi";
+import Loader from "../Loader/Loader";
 const Todoform = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+
+  //!@calling mutation
+  const queryClient = useQueryClient();
+
+  const { mutate, isLoading } = useMutation({
+    mutationKey: ["add-todo"],
+    mutationFn: (values) => addtodo(values),
+    onSuccess: () => {
+      queryClient.invalidateQueries("get-item");
+    },
+  });
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <div
       style={{
@@ -29,9 +43,8 @@ const Todoform = () => {
           date: Yup.date().required("Date is required"),
         })}
         onSubmit={(values) => {
-          values.id = getRandomId();
-          dispatch(addItem(values));
-          // console.log(values);
+          console.log(values);
+          mutate(values);
         }}
       >
         {(formik) => (
@@ -54,7 +67,7 @@ const Todoform = () => {
             ) : null}
 
             <TextField
-              label="Date"
+              // label="Date"
               required
               type="date"
               {...formik.getFieldProps("date")}
